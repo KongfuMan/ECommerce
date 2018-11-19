@@ -8,8 +8,8 @@ class Signin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            username: 'qwer',
+            password: '123',
             submitted: false
         };
 
@@ -31,7 +31,7 @@ class Signin extends Component {
             console.log("handleSubmit:  " , this.state);
             this.props.signin(username,password);
         }
-        console.log(this.props);
+        // console.log(this.props);
     }
 
     render() {

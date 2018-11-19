@@ -1,1 +1,3 @@
-export const FETCH_USER = 'fetch_user';
+export const AUTHENTICATED = 'authenticated_user';
+export const UNAUTHENTICATED = 'unauthenticated_user';
+export const AUTHENTICATION_ERROR = 'authentication_error';

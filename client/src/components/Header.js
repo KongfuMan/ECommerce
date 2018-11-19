@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import {AUTHENTICATED, UNAUTHENTICATED} from "../actions/types";
 
 class Header extends Component{
     renderContent(){
-        console.log(this.props.auth);
+        console.log('this.props.auth', this.props.auth);
         switch (this.props.auth){
+            case true:
+                return(
+                    <li key="1"><a href="/user/signout">Sign out</a></li>
+                );
             case null:
                 return(
-                    <li key="1"><a href="/signin">Sign In</a></li>
-                );
-            case false:
-                return(
-                    <li key="1"><a href="/signin">Sign In</a></li>
+                    <ul>
+                        <li key="1"><a href="/user/signin">Sign In(null)</a></li>
+                    </ul>
                 );
             default:
                 return (
-                    <li key="1"><a href="/signin">Sign In</a></li>
+                    <li key="1"><a href="user/signin">Sign In(default)</a></li>
                 );
         }
     }
@@ -37,6 +40,7 @@ class Header extends Component{
     }
 }
 
+//pass a slice of state data to props
 function mapStateToProps(state){
     return {auth : state.auth};
 };

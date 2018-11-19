@@ -31,10 +31,10 @@ public class UserSecurityService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        Set<UserRole> roles = userRoleRepository.findUserRolesByUsername(username);
         if (user == null){
             throw new UsernameNotFoundException("username: " + username + "not found! (chenlaing");
         }
+        Set<UserRole> roles = userRoleRepository.findUserRolesByUsername(username);
         user.setUserRoles(roles);
         return user;
     }

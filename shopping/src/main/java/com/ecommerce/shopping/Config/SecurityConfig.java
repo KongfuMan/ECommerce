@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -43,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             "/user/signup"
     };
 
-    private BCryptPasswordEncoder passwordEncoder(){
+    @Autowired
+    private PasswordEncoder passwordEncoder(){
         return SecurityUtility.passwordEncoder();
     }
 
@@ -80,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
+//                .and().oauth2Login();
 
         JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtService, userSecurityService, authenticationManager());
         http.addFilterBefore(customFilter,UsernamePasswordAuthenticationFilter.class);

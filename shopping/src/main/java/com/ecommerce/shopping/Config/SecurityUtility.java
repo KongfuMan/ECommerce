@@ -3,6 +3,7 @@ package com.ecommerce.shopping.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -10,12 +11,11 @@ import java.util.Random;
 
 @Component
 public class SecurityUtility {
-    private static final String SALT = "12312312443wejwoerjwe@#$%$#$%^&kshfd";  //
-
+//    private static final String SALT = "12312312443wejwoerjwe@#$%$#$%^&kshfd";
 
     @Bean
-    public static BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));
+    public static PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(12); // new SecureRandom(SALT.getBytes())
     }
 
     @Bean
