@@ -41,16 +41,22 @@ class Signup extends Component {
         const { username, password, email, firstname,lastname,submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
-                <img class="responsive-img" src="cool_pic.jpg" alt=''/>
+                <img className="responsive-img" src="cool_pic.jpg" alt=''/>
                 <h2 align="center">Signup</h2>
                 <form name="form">
                     <div className={'form-group'}>
                         <label htmlFor="username">Username</label>
                         <input type="text" className="form-control" name={'username'} value={username} onChange={this.handleChange}/>
+                        {submitted && !username &&
+                            <div className="help-block red-text">Username is required</div>
+                        }
                     </div>
                     <div className={'form-group'}>
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" name={'password'} value={password} onChange={this.handleChange}/>
+                        {submitted && !password &&
+                            <div className="help-block red-text">Password is required</div>
+                        }
                     </div>
                     <div className={'form-group'}>
                         <label htmlFor="firstName">Email</label>
@@ -66,7 +72,7 @@ class Signup extends Component {
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Submit
-                            <i class="material-icons right">send</i>
+                            <i className="material-icons right">send</i>
                         </button>
                         <Link to="/signin">Cancel</Link>
                     </div>

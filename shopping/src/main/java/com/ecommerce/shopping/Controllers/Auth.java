@@ -45,9 +45,9 @@ public class Auth {
         return  null;
     }
 
-    @GetMapping(path = "/test")
-    public String test(){
-        int i = 1;
-        return "test success";
+    @GetMapping(path = "/signout")
+    public void signOut(HttpServletRequest req, HttpServletResponse res){
+        res.setStatus(HttpServletResponse.SC_OK);
+        return;
     }
 }
