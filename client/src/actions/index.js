@@ -107,7 +107,7 @@ function signoutError(error) {
 }
 
 async function getJwt(){
-    const token = await localStorage.getItem(USER_TOKEN);
+    const token = await localStorage.getItem(USER_TOKEN) || '';
     const authStr = 'Bearer '.concat(token);
     return {headers:{'Authorization': authStr}};   //attach this jwt to each request
 }
@@ -124,7 +124,7 @@ export const authenticateUser = ()=>
             //will deal with the action based on their action.type
             dispatch(authReceive());
         }catch (error){
-            console.log('Authenticate error',error.response.status);
+            // console.log('Authenticate error',error.response);
             dispatch(authError());
         }
     };
@@ -136,12 +136,12 @@ export const signin = (username, password) =>
         try{
             const user = await axios.post('/user/signin',{'username':username, 'password':password});
             if (user){
-                console.log('user:', user);
+                // console.log('user:', user);
                 localStorage.setItem(USER_TOKEN, user.data);
                 dispatch(signinReceive());
             }
         }catch (error){
-            console.log("Signin fails, error:" , error.response);
+            // console.log("Signin fails, error:" , error.response);
             dispatch(signinError(error));
         }
     }
@@ -150,11 +150,12 @@ export const signup = (signupForm) =>
     async (dispatch) => {
         dispatch(signupRequest());
         try{
-            const user = await axios.post('/user/signup',JSON.stringify(signupForm));
+            // console.log(signupForm);
+            const user = await axios.post('/user/signup',signupForm);
             localStorage.setItem(USER_TOKEN, user.data);
             dispatch(signupReceive());
         }catch(error){
-            console.log("Signup fails, error:" , error);
+            // console.log("Signup fails, error:" , error);
             dispatch(signupError(error))
         }
     }
@@ -163,11 +164,11 @@ export const signout = () =>
     async (dispatch) => {
         dispatch(signoutRequest());
         try{
-            await axios.get('user/signout');
+            // await axios.get('/user/signout');
             localStorage.removeItem(USER_TOKEN);
             dispatch(signoutReceive());
         }catch (error){
-            console.log("Signout fails, error:" , error);
+            // console.log("Signout fails, error:" , error);
             dispatch(signoutError(error));
         }
     }

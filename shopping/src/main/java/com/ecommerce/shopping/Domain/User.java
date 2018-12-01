@@ -1,11 +1,11 @@
 package com.ecommerce.shopping.Domain;
 
 import com.ecommerce.shopping.Domain.Security.Authority;
-import com.ecommerce.shopping.Domain.Security.UserRole;
+import com.ecommerce.shopping.Domain.Security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,11 +19,21 @@ public class User implements UserDetails, Serializable{
     private static final long serialVersionID = 289676792837L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy= GenerationType.AUTO,
+            generator="native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
+    @Column(name = "user_name",nullable = false, unique = true, updatable = false)
     private String username;
+
+    @Column(name = "password", nullable = false)
     private String password;
 
     //rename the attribute as "first_name" in database table
@@ -35,12 +45,14 @@ public class User implements UserDetails, Serializable{
 
     private String email;
     private String phone;
+
+    @Transient
     private boolean enabled = true;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
-
+    @JoinColumn(name = "user_role_id")
+    private Role userRole;
 
     public static long getSerialVersionID() {
         return serialVersionID;
@@ -53,7 +65,6 @@ public class User implements UserDetails, Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-
 
     @Override
     public String getUsername() {
@@ -114,18 +125,18 @@ public class User implements UserDetails, Serializable{
         this.enabled = enabled;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public Role getUserRole() {
+        return userRole;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserRole(Role userRole) {
+        this.userRole = userRole;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Authority> authorities = new HashSet<>();
-        userRoles.forEach(userRole -> authorities.add(new Authority(userRole.getRole().getName())));
+        authorities.add(new Authority(userRole.getName()));
         return authorities;
     }
 
@@ -148,14 +159,14 @@ public class User implements UserDetails, Serializable{
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + username + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", enabled=" + enabled +
-                ", userRoles=" + userRoles +
+                ", userRole=" + userRole +
                 '}';
     }
 }

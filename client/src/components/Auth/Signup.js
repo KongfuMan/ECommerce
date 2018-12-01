@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index'
 
@@ -30,20 +30,26 @@ class Signup extends Component {
 
         this.setState({ submitted: true });
         const { username, password } = this.state;
+        // console.log("Signup_handleSubmit:  " , this.state);
         if (username && password){  //send to action creator-->send to server-->get token-->save token to redux
-            console.log("handleSubmit:  " , this.state);
-            this.props.signup(username,password);
+            // console.log("handleSubmit:  " , this.state);
+            this.props.signup(this.state);
         }
         // console.log(this.props);
     }
 
     render() {
         const { username, password, email, firstname,lastname,submitted } = this.state;
+        if (this.props.auth.isAuthenticated){
+            return(
+                <Redirect to='/'/>
+            );
+        }
         return (
             <div className="col-md-6 col-md-offset-3">
                 <img className="responsive-img" src="cool_pic.jpg" alt=''/>
                 <h2 align="center">Signup</h2>
-                <form name="form">
+                <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group'}>
                         <label htmlFor="username">Username</label>
                         <input type="text" className="form-control" name={'username'} value={username} onChange={this.handleChange}/>
@@ -82,10 +88,10 @@ class Signup extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     return {
-//
-//     }
-// }
+function mapStateToProps({auth}) {
+    return {
+        auth
+    }
+}
 
-export default connect(null,actions)(Signup);
+export default connect(mapStateToProps,actions)(Signup);

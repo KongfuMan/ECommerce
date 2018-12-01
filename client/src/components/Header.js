@@ -5,9 +5,7 @@ import * as actions from '../actions/index';
 class Header extends Component{
     renderContent(){
         const{isAuthenticated} = this.props.auth;
-        // const{auth} = this.props;
-        // const{isAuthenticated} = auth;
-        console.log('this.props.isAuthenticated: ', isAuthenticated);
+        console.log(isAuthenticated);
         switch (isAuthenticated){
             case true:
                 return(
@@ -23,7 +21,7 @@ class Header extends Component{
         return(
             <nav>
                 <div className="nav-wrapper">
-                    <a href="/" className="brand-logo">Logo</a>
+                    <a href="/" className="brand-logo">EMart</a>
                     <ul className="right">
                         {this.renderContent()}
                     </ul>

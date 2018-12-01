@@ -23,7 +23,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static com.ecommerce.shopping.Security.SecurityConstants.SIGN_IN_URL;
 
-@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
@@ -73,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().mvcMatchers(PUBLIC_MATCHERS);
     }
 
     @Override

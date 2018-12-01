@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path="/admin")
 public class Admin {
 
-
-
     @GetMapping(path = "/test")
     public String test(){
         return "test authority success!";

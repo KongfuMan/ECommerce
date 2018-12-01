@@ -18,7 +18,6 @@ public class Auth {
     @GetMapping(path = "/authenticate")
     public void authenticateUser(HttpServletRequest req, HttpServletResponse res){
         res.setStatus(HttpServletResponse.SC_OK);
-        return;
     }
 
     @PostMapping(path = "/signup")
@@ -35,6 +34,7 @@ public class Auth {
 
     @PostMapping("/signin")
     public String signIn(@RequestBody User user, HttpServletResponse response)throws Exception{
+        System.out.println(user);
         String jwt = userService.authenticateUser(user);
         if (jwt != null){
             System.out.print(jwt);
