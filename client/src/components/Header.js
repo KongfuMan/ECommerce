@@ -10,7 +10,7 @@ class Header extends Component{
         switch (isAuthenticated){
             case true:
                 return(
-                    <li key="1"><button  onClick={this.props.signout}>Sign out</button></li>
+                    <li key="1"><button className='link-button' onClick={this.props.signout}>Sign out</button></li>
                 );
             default:
                 return (
@@ -21,7 +21,7 @@ class Header extends Component{
     render(){
         return(
             <nav>
-                <div className="nav-wrapper">
+                <div className="nav-wrapper blue-grey darken-4">
                     <a href="/" className="brand-logo">EMart</a>
                     <ul className="right">
                         {this.renderContent()}
@@ -30,6 +30,15 @@ class Header extends Component{
                         <li><Link to="/order">Order</Link></li>
                         <li><Link to="/shopping">Shopping Cart</Link></li>
                     </ul>
+                </div>
+                <div class="nav-wrapper">
+                    <form>
+                        <div className="input-field center col s1">
+                            <input id="search" type="search" required />
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                        </div>
+                    </form>
                 </div>
             </nav>
         );
