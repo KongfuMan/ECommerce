@@ -26,6 +26,6 @@ public class Product {
     private String amount;
     @Column(name = "price")
     private String price;
-    @Column(name = "product_catergory_id")
-    private long catergoryId;
+    @Column(name = "product_category_id")
+    private long categoryId;
 }
