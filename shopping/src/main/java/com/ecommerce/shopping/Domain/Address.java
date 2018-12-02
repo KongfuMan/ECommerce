@@ -18,9 +18,14 @@ public class Address {
             name = "native",
             strategy = "native"
     )
+    @Column(name = "address_id")
     private int addressId;
+    @Column(name = "street")
     private String street;
+    @Column(name = "city")
     private String city;
+    @Column(name = "state")
     private String state;
+    @Column(name = "zip")
     private String zip;
 }
