@@ -15,13 +15,8 @@ import java.util.*;
 
 @Service
 public class JwtService {
-    private final String secret;
-    private final long tokenValidityInMilliseconds;
-
-    public JwtService() {
-        this.secret = Base64.getEncoder().encodeToString(SecurityConstants.SECRET.getBytes());
-        this.tokenValidityInMilliseconds = SecurityConstants.EXPIRATION_TIME;
-    }
+    private final String secret = Base64.getEncoder().encodeToString(SecurityConstants.SECRET.getBytes());
+    private final long tokenValidityInMilliseconds = SecurityConstants.EXPIRATION_TIME;
 
     public String createToken(final User user) throws Exception{
         Date now = new Date();

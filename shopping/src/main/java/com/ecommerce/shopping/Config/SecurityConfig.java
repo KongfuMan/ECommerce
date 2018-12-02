@@ -1,12 +1,9 @@
 package com.ecommerce.shopping.Config;
 
 import com.ecommerce.shopping.Security.JwtAuthenticationFilter;
-import com.ecommerce.shopping.Services.JwtService;
 import com.ecommerce.shopping.Services.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,15 +23,8 @@ import static com.ecommerce.shopping.Security.SecurityConstants.SIGN_IN_URL;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-
-    @Autowired
-    private Environment env;
-
     @Autowired
     private UserSecurityService userSecurityService;
-
-    @Autowired
-    private JwtService jwtService;
 
     private static final String[] PUBLIC_MATCHERS = {
             "/",
@@ -72,21 +62,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().mvcMatchers(PUBLIC_MATCHERS);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter();
+        http.addFilterBefore(customFilter,UsernamePasswordAuthenticationFilter.class);
+
         http.csrf().disable().cors().disable()
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers(PUBLIC_MATCHERS).permitAll()
-                    .anyRequest().authenticated()
-                    .and().logout().logoutUrl("user/signout");
+                    .anyRequest().authenticated();
+//                    .and().logout().logoutUrl("/user/signout");
 //                .and().oauth2Login();
 
-        JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtService, userSecurityService, authenticationManager());
-        http.addFilterBefore(customFilter,UsernamePasswordAuthenticationFilter.class);
     }
 
 //    @Autowired

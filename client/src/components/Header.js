@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
+import {Link} from 'react-router-dom'
 
 class Header extends Component{
     renderContent(){
@@ -9,11 +10,14 @@ class Header extends Component{
         switch (isAuthenticated){
             case true:
                 return(
-                    <li key="1"><a onClick={this.props.signout}>Sign out</a></li>
+                    <li key="1" onClick={this.props.signout}>Sign out</li>
                 );
             default:
                 return (
-                    <li key="1"><a href="/signin">Sign In</a></li>
+                    <div>
+                        <li key="1"><Link to="/signin">Sign In</Link></li>
+                        <li key="2"><Link to="/admin">Admin</Link></li>
+                    </div>
                 );
         }
     }
@@ -26,8 +30,8 @@ class Header extends Component{
                         {this.renderContent()}
                     </ul>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><a href="/">Order</a></li>
-                        <li><a href="/">Shopping Cart</a></li>
+                        <li><Link to="/order">Order</Link></li>
+                        <li><Link to="/shoppingcart">Shopping Cart</Link></li>
                     </ul>
                 </div>
             </nav>
