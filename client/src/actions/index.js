@@ -4,7 +4,7 @@ import {AUTH_REQUEST,AUTH_SUCESS,AUTH_FAILURE} from "./types";
 import {SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE} from "./types";
 import {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} from "./types";
 import {SIGNOUT_REQUEST, SIGNOUT_SUCCESS, SIGNOUT_FAILURE} from "./types";
-
+import {FETCH_PRODUCTS} from "./types";
 
 function authRequest() {
     return {
@@ -172,3 +172,56 @@ export const signout = () =>
             dispatch(signoutError(error));
         }
     }
+
+
+
+// function fetchProductsRequest() {
+//     return {
+//         type: FETCH_PRODUCTS_REQUEST,
+//         isFetching: true,
+//         isF: false,
+//     }
+// }
+//
+// function fetchProductsReceive() {
+//     return {
+//         type: FETCH_PRODUCTS_SUCCESS,
+//         isFetching: false,
+//         isAuthenticated: true,
+//     }
+// }
+//
+// function fetchProductsError(error) {
+//     return {
+//         type: FETCH_PRODUCTS_FALURE,
+//         isFetching: false,
+//         isAuthenticated: false,
+//         error:error
+//     }
+// }
+
+function fetchProductsSucess(products) {
+    return {
+        type: FETCH_PRODUCTS,
+        payload: products.data
+    }
+}
+
+function fetchProductsFail(){
+    return {
+        type: FETCH_PRODUCTS,
+        payload: null
+    }
+}
+
+export const fetchProducts = ()=>
+    async (dispatch)=>{
+        try{
+            const products = await axios.get('/products');
+            dispatch(fetchProductsSucess(products))
+        }catch (error){
+            dispatch(fetchProductsFail())
+        }
+    }
+
+
