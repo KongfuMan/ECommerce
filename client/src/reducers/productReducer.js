@@ -6,5 +6,7 @@ export default function (state = {}, action) {
             return Object.assign({},state,{
                 allproducts:action.payload
             });
+        default:
+            return state;
     }
 }
