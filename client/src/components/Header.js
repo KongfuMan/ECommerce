@@ -21,7 +21,8 @@ class Header extends Component{
     render(){
         return(
             <nav>
-                <div className="nav-wrapper">
+                <div className="nav-wrapper blue-grey darken-4">
+
                     <a href="/" className="brand-logo">EMart</a>
                     <ul className="right">
                         {this.renderContent()}
