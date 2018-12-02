@@ -7,12 +7,13 @@ import {connect} from 'react-redux'
 import * as actions from '../actions/index';
 import Signin from './Auth/Signin';
 import Signup from './Auth/Signup';
-import AdminDashboard from './Admin/AdminDashboard';
+import Order from './Order';
+import ProductForm from "./Product/ProductForm";
 
 
 class App extends Component {
     componentDidMount(){
-        this.props.authenticateUser();
+        //this.props.authenticateUser();
     }
     render() {
         return (
@@ -23,7 +24,9 @@ class App extends Component {
                         <Route exact={true} path="/" component={Home}></Route>
                         <Route path='/signin' component={Signin}></Route>
                         <Route path='/signup' component={Signup}></Route>
-                        <Route path='/admin' component={AdminDashboard}></Route>
+                        <Route path='/order' component={Order}></Route>
+                        <Route path='/productform' component={ProductForm}></Route>
+
                         <Footer/>
                     </div>
                 </BrowserRouter>
