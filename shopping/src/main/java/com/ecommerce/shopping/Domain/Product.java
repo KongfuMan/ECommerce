@@ -20,4 +20,12 @@ public class Product {
     )
     @Column(name = "product_id")
     private long productId;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "amount")
+    private String amount;
+    @Column(name = "price")
+    private String price;
+    @Column(name = "product_catergory_id")
+    private long catergoryId;
 }
