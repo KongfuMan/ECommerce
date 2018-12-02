@@ -10,7 +10,7 @@ class Header extends Component{
         switch (isAuthenticated){
             case true:
                 return(
-                    <li key="1"><button  onClick={this.props.signout}>Sign out</button></li>
+                    <li key="1"><button className="link-button" onClick={this.props.signout}>Sign out</button></li>
                 );
             default:
                 return (
