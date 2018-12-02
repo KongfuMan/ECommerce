@@ -22,7 +22,6 @@ class Header extends Component{
         return(
             <nav>
                 <div className="nav-wrapper blue-grey darken-4">
-
                     <a href="/" className="brand-logo">EMart</a>
                     <ul className="right">
                         {this.renderContent()}
@@ -31,6 +30,15 @@ class Header extends Component{
                         <li><Link to="/order">Order</Link></li>
                         <li><Link to="/shopping">Shopping Cart</Link></li>
                     </ul>
+                </div>
+                <div class="nav-wrapper">
+                    <form>
+                        <div className="input-field center col s1">
+                            <input id="search" type="search" required />
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                        </div>
+                    </form>
                 </div>
             </nav>
         );
