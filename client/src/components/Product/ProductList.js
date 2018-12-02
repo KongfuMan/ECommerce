@@ -11,7 +11,7 @@ class ProductList extends Component{
                 <div className="row">
 
                     <div className="col s12">
-                        <img className="responsive-img" src="https://images-na.ssl-images-amazon.com/images/G/01/img18/events/cybermonday/gw/cmdw_gw_desktop_editorial_2300x646_v3._CB479800167_.jpg"/>
+                        <img className="responsive-img" src="https://images-na.ssl-images-amazon.com/images/G/01/img18/events/cybermonday/gw/cmdw_gw_desktop_editorial_2300x646_v3._CB479800167_.jpg" alt=''/>
                     </div>
 
                     <div id="toggle-container" className="col s3 cards-container">

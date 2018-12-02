@@ -61,10 +61,6 @@ class ProductForm extends Component{
 
 
                         </div>
-                        <div className="card-action">
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                        </div>
                     </div>
                 </div>
             </div>
