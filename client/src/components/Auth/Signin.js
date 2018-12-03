@@ -10,6 +10,7 @@ class Signin extends Component {
         this.state = {
             username: 'qwer',
             password: '123',
+            role: 'customer',
             submitted: false
         };
 
@@ -26,10 +27,10 @@ class Signin extends Component {
         event.preventDefault();
 
         this.setState({ submitted: true });
-        const { username, password } = this.state;
+        const { username, password, role } = this.state;
         if (username && password){  //send to action creator-->send to server-->get token-->save token to redux
             console.log("handleSubmit:  " , this.state);
-            await this.props.signin(username,password);
+            await this.props.signin(username,password,role);
         }
     }
 

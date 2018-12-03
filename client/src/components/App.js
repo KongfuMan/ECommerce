@@ -9,6 +9,14 @@ import Signin from './Auth/Signin';
 import Signup from './Auth/Signup';
 import Order from './Order';
 import ProductForm from "./Product/ProductForm";
+import ShoppingCart from "./ShoppingCart";
+import UserDashboard from "./UserDashboard";
+import NewStore from "./NewStore";
+import Dashboard from "./Dashboard";
+import EditStore from "./EditStore";
+import EditProduct from "./Manager/EditProduct";
+import Payment from "./Payment";
+import ProductItem from "./Product/ProductItem";
 
 
 class App extends Component {
@@ -26,6 +34,15 @@ class App extends Component {
                         <Route path='/signup' component={Signup}></Route>
                         <Route path='/order' component={Order}></Route>
                         <Route path='/productform' component={ProductForm}></Route>
+                        <Route path='/ShoppingCart' component={ShoppingCart}></Route>
+                        <Route path='/UserDashboard' component={UserDashboard}></Route>
+                        <Route path='/NewStore' component={NewStore}></Route>
+                        <Route path='/Dashboard' component={Dashboard}></Route>
+                        <Route path='/EditStore' component={EditStore}></Route>
+                        <Route path='/EditProduct' component={EditProduct}></Route>
+                        <Route path='/Payment' component={Payment}></Route>
+                        <Route path='/ProductItem' component={ProductItem}></Route>
+
 
                         <Footer/>
                     </div>

@@ -1,25 +1,25 @@
 package com.ecommerce.shopping.Domain;
 
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Customer")
-public class Customer {
-    @Id
-    @GeneratedValue(
-            strategy= GenerationType.AUTO,
-            generator="native"
-    )
-    @GenericGenerator(
-            name = "native",
-            strategy = "native"
-    )
-    @Column(name = "customer_id")
-    private int customerId;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "address_id")
-    private int addressId;
+public class Customer extends User{
+
+
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY)
+    private Set<Transaction> transactions = new HashSet<Transaction>();
+
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY)
+    private Set<Order> orders = new HashSet<Order>();
+
+    @Override
+    public String toString() {
+        return "Customer{} " + super.toString();
+    }
 }

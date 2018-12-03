@@ -4,7 +4,7 @@ import {AUTH_REQUEST,AUTH_SUCESS,AUTH_FAILURE} from "./types";
 import {SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE} from "./types";
 import {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} from "./types";
 import {SIGNOUT_REQUEST, SIGNOUT_SUCCESS, SIGNOUT_FAILURE} from "./types";
-import {FETCH_PRODUCTS} from "./types";
+
 
 function authRequest() {
     return {
@@ -129,12 +129,13 @@ export const authenticateUser = ()=>
         }
     };
 
-export const signin = (username, password) =>
+export const signin = (username, password,role) =>
     async (dispatch) => {
-        console.log("Sign in action creator");
+        const rolename = role.toString();
+        console.log("Signin action, signin data: ",{rolename:{'username':username, 'password':password}});
         dispatch(signinRequest())
         try{
-            const user = await axios.post('/user/signin',{'username':username, 'password':password});
+            const user = await axios.post('/user/signin',{[role]:{'username':username, 'password':password}});
             if (user){
                 // console.log('user:', user);
                 localStorage.setItem(USER_TOKEN, user.data);
@@ -199,29 +200,5 @@ export const signout = () =>
 //         error:error
 //     }
 // }
-
-function fetchProductsSucess(products) {
-    return {
-        type: FETCH_PRODUCTS,
-        payload: products.data
-    }
-}
-
-function fetchProductsFail(){
-    return {
-        type: FETCH_PRODUCTS,
-        payload: null
-    }
-}
-
-export const fetchProducts = ()=>
-    async (dispatch)=>{
-        try{
-            const products = await axios.get('/products');
-            dispatch(fetchProductsSucess(products))
-        }catch (error){
-            dispatch(fetchProductsFail())
-        }
-    }
 
 

@@ -1,8 +1,11 @@
 package com.ecommerce.shopping.Domain;
 
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -20,12 +23,20 @@ public class Product {
     )
     @Column(name = "product_id")
     private long productId;
+
     @Column(name = "name")
     private String name;
-    @Column(name = "amount")
-    private String amount;
+
+    @Column(name = "inventory_amount")
+    private int amount;
+
     @Column(name = "price")
-    private String price;
-    @Column(name = "product_catergory_id")
-    private long catergoryId;
+    private float price;
+
+    @ManyToOne
+    @JoinColumn(name = "category_name", nullable = false)
+    private Category category;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<OrderProduct> orderProducts = new HashSet<OrderProduct>();
 }

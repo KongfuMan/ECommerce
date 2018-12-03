@@ -15,21 +15,11 @@ public class Role implements Serializable{
     private static final long serialVersionID = 28934792837L;
 
     @Id
-    @Column(name = "role_id",nullable = false, updatable = false)
-    @GeneratedValue(
-            strategy= GenerationType.AUTO,
-            generator="native"
-    )
-    @GenericGenerator(
-            name = "native",
-            strategy = "native"
-    )
-    private int roleId;
-
+    @Column(name = "role_name")
     private String name;
 
-    @OneToMany(mappedBy = "userRole", fetch = FetchType.LAZY)
     @JsonIgnore
+    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<User>();
 
     public Role(){
@@ -37,14 +27,6 @@ public class Role implements Serializable{
 
     public Role(String name){
         this.setName(name);
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
     }
 
     public String getName() {

@@ -3,6 +3,8 @@ package com.ecommerce.shopping.Domain;
 import com.ecommerce.shopping.Domain.Security.Authority;
 import com.ecommerce.shopping.Domain.Security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,9 +15,18 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+
+@JsonTypeInfo(use = NAME, include = WRAPPER_OBJECT, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value=Customer.class, name = "customer"),
+        @JsonSubTypes.Type(value=Manager.class, name = "manager")
+})
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "User")
-public class User implements UserDetails, Serializable{
+public abstract class User implements UserDetails, Serializable{
     private static final long serialVersionID = 289676792837L;
 
     @Id
@@ -27,8 +38,8 @@ public class User implements UserDetails, Serializable{
             name = "native",
             strategy = "native"
     )
-    @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    @Column(name = "user_id", nullable = false, updatable = false)
+    private int id;
 
     @Column(name = "user_name",nullable = false, unique = true, updatable = false)
     private String username;
@@ -49,20 +60,24 @@ public class User implements UserDetails, Serializable{
     @Transient
     private boolean enabled = true;
 
-    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
-    @JoinColumn(name = "user_role_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_name", nullable = false)
     private Role userRole;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Address> addresses = new HashSet<Address>();
 
     public static long getSerialVersionID() {
         return serialVersionID;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -115,6 +130,14 @@ public class User implements UserDetails, Serializable{
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+//    public Set<Address> getAddresses() {
+//        return addresses;
+//    }
+//
+//    public void setAddresses(Set<Address> addresses) {
+//        this.addresses = addresses;
+//    }
 
     @Override
     public boolean isEnabled() {

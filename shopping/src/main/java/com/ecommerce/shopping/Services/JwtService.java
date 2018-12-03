@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ecommerce.shopping.Domain.Customer;
 import com.ecommerce.shopping.Domain.Security.Role;
 import com.ecommerce.shopping.Domain.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,7 +45,7 @@ public class JwtService {
                 .build(); //Reusable verifier instance
         DecodedJWT jwt = verifier.verify(token);
         String rolename = jwt.getClaim("role").asString();
-        User user = new User();
+        User user = new Customer();
         user.setUsername(jwt.getSubject());
         Role role = new Role(rolename);
         role.getUsers().add(user);

@@ -13,7 +13,7 @@ class EditProduct extends Component{
                         <div className="row">
                             <div className="input-field col s12">
                                 <input placeholder="Product Name" id="first_name" type="text" className="validate"/>
-                                <label htmlFor="first_name">Product Name</label>
+                                <label htmlFor="first_name"></label>
                             </div>
                         </div>
                         <div className="row">

@@ -45,15 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     // map the role in security to role in database
-    @Bean
-    public GrantedAuthoritiesMapper authoritiesMapper(){
-        SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
-        //every authority that comes out of databse will be converted
-        //into uppercase and then add a ROLE_ in front of it
-        authorityMapper.setConvertToUpperCase(true);
-        authorityMapper.setDefaultAuthority("USER");
-        return authorityMapper;
-    }
+//    @Bean
+//    public GrantedAuthoritiesMapper authoritiesMapper(){
+//        SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
+//        //every authority that comes out of databse will be converted
+//        //into uppercase and then add a ROLE_ in front of it
+//        authorityMapper.setConvertToUpperCase(true);
+//        authorityMapper.setDefaultAuthority("USER");
+//        return authorityMapper;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

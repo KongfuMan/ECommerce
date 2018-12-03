@@ -28,17 +28,9 @@ class Header extends Component{
                     </ul>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to="/order">Order</Link></li>
-                        <li><Link to="/shopping">Shopping Cart</Link></li>
+                        <li><Link to="/shoppingCart">Shopping Cart</Link></li>
+                        <li><Link to="/UserDashboard">My account</Link></li>
                     </ul>
-                </div>
-                <div class="nav-wrapper">
-                    <form>
-                        <div className="input-field center col s1">
-                            <input id="search" type="search" required />
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
-                        </div>
-                    </form>
                 </div>
             </nav>
         );
