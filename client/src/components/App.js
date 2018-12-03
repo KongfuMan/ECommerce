@@ -21,7 +21,7 @@ import ProductItem from "./Product/ProductItem";
 
 class App extends Component {
     componentDidMount(){
-        //this.props.authenticateUser();
+        this.props.authenticateUser();
     }
     render() {
         return (
@@ -33,7 +33,7 @@ class App extends Component {
                         <Route path='/signin' component={Signin}></Route>
                         <Route path='/signup' component={Signup}></Route>
                         <Route path='/order' component={Order}></Route>
-                        <Route path='/productform' component={ProductForm}></Route>
+                        <Route path='/productform/:productId' exact component={ProductForm}></Route>
                         <Route path='/ShoppingCart' component={ShoppingCart}></Route>
                         <Route path='/UserDashboard' component={UserDashboard}></Route>
                         <Route path='/NewStore' component={NewStore}></Route>
@@ -42,8 +42,6 @@ class App extends Component {
                         <Route path='/EditProduct' component={EditProduct}></Route>
                         <Route path='/Payment' component={Payment}></Route>
                         <Route path='/ProductItem' component={ProductItem}></Route>
-
-
                         <Footer/>
                     </div>
                 </BrowserRouter>

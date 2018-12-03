@@ -23,6 +23,39 @@ public class Store {
     private String name;
 
     @OneToOne(mappedBy = "store", fetch = FetchType.LAZY)
-    @JoinColumn(name = "mgr_id", nullable = false)
+    @JoinColumn(name = "mgr_id",unique = true, nullable = false)
     private Manager mgr;
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Manager getMgr() {
+        return mgr;
+    }
+
+    public void setMgr(Manager mgr) {
+        this.mgr = mgr;
+    }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "storeId=" + storeId +
+                ", name='" + name + '\'' +
+                ", mgr=" + mgr +
+                '}';
+    }
 }

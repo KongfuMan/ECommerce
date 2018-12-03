@@ -1,5 +1,5 @@
 import {FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_FAILURE} from "./types";
-import {FETCH_ORDERS_REQUEST, FETCH_ORDERS_FAILURE, FETCH_ORDERS_SUCCESS} from "./types";
+import {FETCH_ORDERS_REQUEST, FETCH_ORDERS_FAILURE, FETCH_ORDERS_SUCCESS,FETCH_A_PRODUCT} from "./types";
 import axios from "axios/index";
 
 
@@ -30,13 +30,22 @@ export const fetchProducts = ()=>
     async (dispatch)=>{
         dispatch(fetchProductsRequest());
         try{
-            const products = await axios.get('/products');
+            const products = await axios.get('/api/product/list');
             dispatch(fetchProductsSucess(products));
         }catch (error){
             dispatch(fetchProductsFail(error));
         }
     }
 
+export const fetchAProduct = (productId)=>
+    async (dispatch)=>{
+        try{
+            const product = await axios.get('/api/product/one/'+productId);
+            dispatch({type:FETCH_A_PRODUCT,payload:product.data});
+        }catch (error){
+            console.log(error);
+        }
+    }
 
 function fetchOrdersRequest(){
     return {

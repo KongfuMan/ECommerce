@@ -32,4 +32,46 @@ public class Transaction {
 
     @OneToMany(mappedBy = "transaction", fetch = FetchType.LAZY)
     private Set<Order> orders = new HashSet<Order>();
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "orderId=" + orderId +
+                ", date=" + date +
+                ", customer=" + customer +
+                ", orders=" + orders +
+                '}';
+    }
 }

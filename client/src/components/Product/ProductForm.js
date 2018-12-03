@@ -1,11 +1,18 @@
 //used for admin to add or edite product information
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../../actions'
 
 class ProductForm extends Component{
+    componentDidMount(){
+        const {productId} = this.props.match.params
+        this.props.fetchAProduct(productId);
+    }
+
     render(){
+        const {productForm} = this.props.productForm
         return(
             <div className="row">
-
                 <div className="col s4 ">
                     <div className="card large">
                         <div className="card-image waves-effect waves-block waves-light">
@@ -25,21 +32,10 @@ class ProductForm extends Component{
                 <div className="col s8 ">
                     <div className="card large darken-1">
                         <div className="card-content black-text">
-                            <span className="card-title"><b>Sony Alpha a6000 Mirrorless Camera 16-50mm & 55-210mm Lenses & 128GB Bundle</b></span>
-                            <p><b>By Sony</b></p>
-                            <ul>
-                                <li >
-                                    FEATURES: High resolution with 24MP APS-C sensor and the world's fastest auto focus with 179 AF points and 11FPS
-                                </li>
-                                <li>
-                                    RECORD: Record Full HD 1080/24/60P videos on the go. Has an ISO range of 100-25600 for low light photos
-                                </li>
-                                <li>
-                                    EASILY SHARE PHOTOS: Instant sharing via your compatible tablet and smartphone with Wi-Fi and NFC
-                                </li>
-                            </ul>
+                            <span className="card-title"><b>{productForm.name}</b></span>
+                            <p><b>By {productForm.store}</b></p>
 
-                            <h6><b>Price:</b> $648.00</h6>
+                            <h6><b>Price:</b>{productForm.price}</h6>
 
 
                             <div className="row">
@@ -69,4 +65,8 @@ class ProductForm extends Component{
     }
 }
 
-export default ProductForm;
+const mapStatToProps = (productForm)=>{
+    return{productForm}
+}
+
+export default connect(mapStatToProps,actions)(ProductForm);

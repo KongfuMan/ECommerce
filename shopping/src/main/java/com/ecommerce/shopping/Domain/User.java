@@ -60,13 +60,12 @@ public abstract class User implements UserDetails, Serializable{
     @Transient
     private boolean enabled = true;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_name", nullable = false)
     private Role userRole;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Address> addresses = new HashSet<Address>();
 
     public static long getSerialVersionID() {
@@ -131,13 +130,13 @@ public abstract class User implements UserDetails, Serializable{
         this.phone = phone;
     }
 
-//    public Set<Address> getAddresses() {
-//        return addresses;
-//    }
-//
-//    public void setAddresses(Set<Address> addresses) {
-//        this.addresses = addresses;
-//    }
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     @Override
     public boolean isEnabled() {

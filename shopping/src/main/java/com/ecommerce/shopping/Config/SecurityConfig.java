@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers(PUBLIC_MATCHERS).permitAll()
-                    .anyRequest().authenticated();
+                    .anyRequest().permitAll();
 //                    .and().logout().logoutUrl("/user/signout");
 //                .and().oauth2Login();
 

@@ -1,12 +1,15 @@
 package com.ecommerce.shopping.Controllers;
 
+import com.ecommerce.shopping.Domain.Product;
 import com.ecommerce.shopping.Domain.User;
+import com.ecommerce.shopping.Repositories.ProductRepository;
 import com.ecommerce.shopping.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/user/")

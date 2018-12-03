@@ -1,8 +1,11 @@
 import {combineReducers} from 'redux'
 import authReducer from "./authReducer";
-import productReducer from './productReducer'
+import productListReducer from './productListReducer'
+import productFormReducer from './productFormReducer'
+
 
 export default combineReducers({
     auth : authReducer,
-    products: productReducer
+    productList: productListReducer,
+    productForm: productFormReducer
 });

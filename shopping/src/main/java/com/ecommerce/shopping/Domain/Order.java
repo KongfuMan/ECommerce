@@ -33,4 +33,46 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private Set<OrderProduct> orderProductIds= new HashSet<OrderProduct>();
+
+    public int getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public Set<OrderProduct> getOrderProductIds() {
+        return orderProductIds;
+    }
+
+    public void setOrderProductIds(Set<OrderProduct> orderProductIds) {
+        this.orderProductIds = orderProductIds;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderNum=" + orderNum +
+                ", customer=" + customer +
+                ", transaction=" + transaction +
+                ", orderProductIds=" + orderProductIds +
+                '}';
+    }
 }

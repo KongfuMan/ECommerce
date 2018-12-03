@@ -5,7 +5,7 @@ import com.ecommerce.shopping.Domain.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RoleRepository extends CrudRepository<Role,Long>{
+public interface RoleRepository extends CrudRepository<Role,Integer>{
 
     public Role findByName(String rolename);
 

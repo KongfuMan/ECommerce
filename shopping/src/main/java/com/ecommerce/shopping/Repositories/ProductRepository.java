@@ -2,6 +2,13 @@ package com.ecommerce.shopping.Repositories;
 
 import com.ecommerce.shopping.Domain.Product;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+import java.util.List;
+
+@Transactional
+public interface ProductRepository extends CrudRepository<Product, Integer> {
+    public List<Product> findAll();
+
+    public Product findByProductId(long id);
 }
