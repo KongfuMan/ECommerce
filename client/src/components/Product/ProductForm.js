@@ -32,24 +32,27 @@ class ProductForm extends Component{
             product:productForm,
             quantity:this.state.quantity
         };
-        localStorage.removeItem(SHOPPING_CART);
-        const{history} = this.props;
-        this.props.addToShoppingCart(cartProduct,history);
         // console.log(cartProduct);
-        // localStorage.removeItem(SHOPPING_CART);
-        // const cart = localStorage.getItem(SHOPPING_CART);
-        // if (cart===null){
-        //     const cartProducts = [];
-        //     cartProducts.push(cartProduct);
-        //     localStorage.setItem(SHOPPING_CART, JSON.stringify(cartProducts));
-        // }else{
-        //     const cartProducts = JSON.parse(cart);
-        //     cartProducts.push(cartProduct);
-        //     localStorage.setItem(SHOPPING_CART, JSON.stringify(cartProducts));
-        // }
-        // // console.log(localStorage.getItem(SHOPPING_CART));
+        const id = productForm.productId;
         // const{history} = this.props;
-        // history.push('/shoppingcart');
+        // this.props.addToShoppingCart(cartProduct,history);
+        const cart = localStorage.getItem(SHOPPING_CART);
+        console.log('cart: ',cart);
+        if (cart===null){
+            const cartProducts = new Map();
+            cartProducts.set(id,cartProduct);
+            localStorage.setItem(SHOPPING_CART, JSON.stringify([...cartProducts]));
+        }else{
+            const cartProducts = new Map(JSON.parse(cart));
+            if (cartProducts.has(id)){
+                const curProduct = cartProducts.get(id);
+                cartProduct.quantity += curProduct.quantity;
+            }
+            cartProducts.set(id,cartProduct);
+            localStorage.setItem(SHOPPING_CART, JSON.stringify([...cartProducts]));
+        }
+        const{history} = this.props;
+        history.push('/shoppingcart');
     }
 
     render(){

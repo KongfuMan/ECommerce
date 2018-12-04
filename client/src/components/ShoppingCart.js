@@ -3,31 +3,41 @@ import {connect} from 'react-redux';
 import {SHOPPING_CART} from "../actions/types";
 
 class ShoppingCart extends Component{
+    constructor(props){
+        super(props);
+        const products = JSON.parse(localStorage.getItem(SHOPPING_CART));
+        this.state = {products: products};
+    }
 
     handleDelete(prod){
+        // const{products} = this.state;
+
+    }
+
+    handlCheckout(){
 
     }
 
     renderContent(){
-        const produts = [];
-        produts.push(this.props.shoppingCart);
+        // const produts = [];
+        // produts.push(this.props.shoppingCart);
         // const{product,quantity} = this.props.shoppingCart;
-        // const products = JSON.parse(localStorage.getItem(SHOPPING_CART));
-        return produts.map(prod=>{
+        const{products} = this.state;
+        return products.map(prod=>{
             return(
-                <div className="row">
+                <div className="row" key={prod[0]}>
                     <div className="input-field col s3">
-                        <input disabled value={prod.product.name} id="disabled1" type="text"
+                        <input disabled value={prod[1].product.name} id="disabled1" type="text"
                                className="validate"/>
                         <label htmlFor="disabled1"></label>
                     </div>
                     <div className="input-field col s3">
-                        <input disabled value={prod.product.price} id="disabled2" type="text"
+                        <input disabled value={prod[1].product.price} id="disabled2" type="text"
                                className="validate"/>
                         <label htmlFor="disabled2"></label>
                     </div>
                     <div className="input-field col s3">
-                        <input placeholder={prod.quantity} id="Amount1" type="number" className="validate"/>
+                        <input disabled id="Amount1" type="number" className="validate" value={prod[1].quantity}/>
                         <label htmlFor="Amount1"></label>
                     </div>
                     <div className="input-field col s3">
@@ -49,7 +59,8 @@ class ShoppingCart extends Component{
                     <form className="col s12">
                         {this.renderContent()}
                     </form>
-                    <a className="waves-effect waves-light btn right"><i className="material-icons left">cloud</i>Checkout</a>
+                    <a className="waves-effect waves-light btn left" onClick={this.handlCheckout}>
+                        <i className="material-icons right">attach_money</i>Checkout</a>
                 </div>
             </div>
         );
