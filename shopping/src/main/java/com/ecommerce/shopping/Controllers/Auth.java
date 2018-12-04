@@ -53,4 +53,9 @@ public class Auth {
         res.setStatus(HttpServletResponse.SC_OK);
         return;
     }
+
+    @GetMapping(path = "/insert")
+    public void insert(){
+        userService.insertTestDataToDB();
+    }
 }
