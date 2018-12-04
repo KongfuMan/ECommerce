@@ -28,7 +28,7 @@ class ProductForm extends Component{
 
     handleSubmit(event){
         const {productForm} = this.props.productForm;
-        const cartProduct = {
+        let cartProduct = {
             product:productForm,
             quantity:this.state.quantity
         };
@@ -46,7 +46,7 @@ class ProductForm extends Component{
             const cartProducts = new Map(JSON.parse(cart));
             if (cartProducts.has(id)){
                 const curProduct = cartProducts.get(id);
-                cartProduct.quantity += curProduct.quantity;
+                cartProduct.quantity = cartProduct.quantity.valueOf() + curProduct.quantity.valueOf();
             }
             cartProducts.set(id,cartProduct);
             localStorage.setItem(SHOPPING_CART, JSON.stringify([...cartProducts]));
