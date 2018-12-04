@@ -32,6 +32,16 @@ class Header extends Component{
                         <li><Link to="/UserDashboard">My account</Link></li>
                     </ul>
                 </div>
+                <div className="row">
+                    <div className="input-field col s10">
+                        <i className="material-icons prefix">zoom_in</i>
+                        <input id="icon_prefix" type="text" className="validate"/>
+                        <label htmlFor="icon_prefix">Click here to search</label>
+                    </div>
+                    <div className="input-field col s2">
+                        <a className="waves-effect waves-light btn">Search</a>
+                    </div>
+                </div>
             </nav>
         );
     }

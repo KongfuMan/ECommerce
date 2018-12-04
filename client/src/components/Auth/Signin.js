@@ -31,6 +31,9 @@ class Signin extends Component {
         if (username && password){  //send to action creator-->send to server-->get token-->save token to redux
             console.log("handleSubmit:  " , this.state);
             await this.props.signin(username,password,role);
+            if (!this.props.auth.isAuthenticated){
+                alert("sigin fail! Incorrect username or password");
+            }
         }
     }
 

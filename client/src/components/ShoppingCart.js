@@ -5,13 +5,23 @@ import {SHOPPING_CART} from "../actions/types";
 class ShoppingCart extends Component{
     constructor(props){
         super(props);
-        const products = JSON.parse(localStorage.getItem(SHOPPING_CART));
-        this.state = {products: products};
+        const cart = localStorage.getItem(SHOPPING_CART);
+        if (cart){
+            const products = JSON.parse(cart);
+            this.state = {products: products};
+        }else{
+            this.state = {products: []}
+        }
     }
 
-    handleDelete(prod){
-        // const{products} = this.state;
-
+    handleDelete(prodId){
+        const{products} = this.state;
+        const res = products.filter(prod=>{
+            const id = prod[0];
+            return id != prodId
+        })
+        this.setState({products:res});
+        localStorage.setItem(SHOPPING_CART, JSON.stringify([...new Map(res)]))
     }
 
     handlCheckout(){
@@ -19,29 +29,35 @@ class ShoppingCart extends Component{
     }
 
     renderContent(){
-        // const produts = [];
-        // produts.push(this.props.shoppingCart);
-        // const{product,quantity} = this.props.shoppingCart;
-        const{products} = this.state;
-        return products.map(prod=>{
+        const {products} = this.state;
+        if (!products || products.length === 0){
             return(
-                <div className="row" key={prod[0]}>
+                <div>
+                    <h3 className='center'>You don't have any items in your cart</h3>
+                </div>
+            );
+        }
+        return products.map(prod=>{
+            const id = prod[0];
+            const {product,quantity} = prod[1];
+            return (
+                <div className="row" key={id}>
                     <div className="input-field col s3">
-                        <input disabled value={prod[1].product.name} id="disabled1" type="text"
+                        <input disabled value={product.name} id="disabled1" type="text"
                                className="validate"/>
                         <label htmlFor="disabled1"></label>
                     </div>
                     <div className="input-field col s3">
-                        <input disabled value={prod[1].product.price} id="disabled2" type="text"
+                        <input disabled value={product.price} id="disabled2" type="text"
                                className="validate"/>
                         <label htmlFor="disabled2"></label>
                     </div>
                     <div className="input-field col s3">
-                        <input disabled id="Amount1" type="number" className="validate" value={prod[1].quantity}/>
+                        <input disabled id="Amount1" type="number" className="validate" value={quantity}/>
                         <label htmlFor="Amount1"></label>
                     </div>
                     <div className="input-field col s3">
-                        <a className="waves-effect waves-teal btn-flat" onClick={this.handleDelete}>Delete</a>
+                        <a className="waves-effect waves-teal btn-flat" onClick={()=>this.handleDelete(id)}>Delete</a>
                     </div>
                 </div>
             );
