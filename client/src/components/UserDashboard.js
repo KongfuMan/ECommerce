@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {USER_TOKEN} from "../actions/types";
+import {jwt_decode} from 'jwt-decode'
 
 
 class UserDashboard extends Component{
+
+
     render(){
+        // const jwt =localStorage.getItem(USER_TOKEN);
+        // const decoded = jwt_decode(jwt);
+        // console.log("decode: ", decoded);
+
         return(
 
             <div>

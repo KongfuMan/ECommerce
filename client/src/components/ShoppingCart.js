@@ -1,79 +1,63 @@
 import React, {Component} from 'react';
-
+import {connect} from 'react-redux';
+import {SHOPPING_CART} from "../actions/types";
 
 class ShoppingCart extends Component{
+
+    handleDelete(prod){
+
+    }
+
+    renderContent(){
+        const produts = [];
+        produts.push(this.props.shoppingCart);
+        // const{product,quantity} = this.props.shoppingCart;
+        // const products = JSON.parse(localStorage.getItem(SHOPPING_CART));
+        return produts.map(prod=>{
+            return(
+                <div className="row">
+                    <div className="input-field col s3">
+                        <input disabled value={prod.product.name} id="disabled1" type="text"
+                               className="validate"/>
+                        <label htmlFor="disabled1"></label>
+                    </div>
+                    <div className="input-field col s3">
+                        <input disabled value={prod.product.price} id="disabled2" type="text"
+                               className="validate"/>
+                        <label htmlFor="disabled2"></label>
+                    </div>
+                    <div className="input-field col s3">
+                        <input placeholder={prod.quantity} id="Amount1" type="number" className="validate"/>
+                        <label htmlFor="Amount1"></label>
+                    </div>
+                    <div className="input-field col s3">
+                        <a className="waves-effect waves-teal btn-flat" onClick={this.handleDelete}>Delete</a>
+                    </div>
+                </div>
+            );
+        })
+    }
+
     render(){
+        // console.log(this.props.shoppingCart);
         return(
             <div>
                 <blockquote>
-                    Your shopping cart.
+                    Shopping Cart
                 </blockquote>
                 <div className="row">
                     <form className="col s12">
-                        <div className="row">
-                            <div className="input-field col s3">
-                                <input disabled value="Product Name" id="disabled1" type="text"
-                                       className="validate"/>
-                                <label htmlFor="disabled1"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <input disabled value="Price" id="disabled2" type="text"
-                                       className="validate"/>
-                                <label htmlFor="disabled2"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <input placeholder="Amount" id="Amount1" type="number" className="validate"/>
-                                <label htmlFor="Amount1"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <a className="waves-effect waves-teal btn-flat">Delete</a>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s3">
-                                <input disabled value="Product Name" id="disabled3" type="text"
-                                       className="validate"/>
-                                <label htmlFor="disabled3"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <input disabled value="Price" id="disabled4" type="text"
-                                       className="validate"/>
-                                <label htmlFor="disabled4"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <input placeholder="Amount" id="Amount2" type="number" className="validate"/>
-                                <label htmlFor="Amount2"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <a className="waves-effect waves-teal btn-flat">Delete</a>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s3">
-                                <input disabled value="Product Name" id="disabled5" type="text"
-                                       className="validate"/>
-                                <label htmlFor="disabled5"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <input disabled value="Price" id="disabled6" type="text"
-                                       className="validate"/>
-                                <label htmlFor="disabled6"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <input placeholder="Amount" id="Amount3" type="number" className="validate"/>
-                                <label htmlFor="Amount3"></label>
-                            </div>
-                            <div className="input-field col s3">
-                                <a className="waves-effect waves-teal btn-flat">Delete</a>
-                            </div>
-                        </div>
+                        {this.renderContent()}
                     </form>
-                    <a className="waves-effect waves-light btn"><i className="material-icons left">cloud</i>Buy</a>
-                    <a className="waves-effect waves-light btn" style={{'margin-left': '10px'}}><i className="material-icons left">cloud</i>Save and quit</a>
+                    <a className="waves-effect waves-light btn right"><i className="material-icons left">cloud</i>Checkout</a>
                 </div>
             </div>
         );
     }
 }
 
-export default ShoppingCart;
+const mapStateToProps = ({shoppingCart})=>{
+    return{shoppingCart}
+}
+
+export default connect(mapStateToProps)(ShoppingCart);

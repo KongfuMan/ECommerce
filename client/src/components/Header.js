@@ -22,7 +22,7 @@ class Header extends Component{
         return(
             <nav>
                 <div className="nav-wrapper blue-grey darken-4">
-                    <a href="/" className="brand-logo">EMart</a>
+                    <Link to={'/'} className="brand-logo">EMart</Link>
                     <ul className="right">
                         {this.renderContent()}
                     </ul>

@@ -1,4 +1,5 @@
 export const USER_TOKEN = 'USER_TOKEN';
+export const SHOPPING_CART = "SHOPPING_CART";
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_SUCESS = 'AUTH_SUCESS';
@@ -25,3 +26,5 @@ export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
 export const FETCH_ORDERS_FAILURE = 'FETCH_ORDERS_FAILURE';
 
 export const FETCH_A_PRODUCT = 'FETCH_A_PRODUCT';
+
+export const ADD_TO_CART = 'ADD_TO_CART';
