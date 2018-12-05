@@ -7,18 +7,17 @@ import * as actions from '../actions/index';
 class Order extends Component{
     constructor(props){
         super(props);
+        if (!this.props.auth.isAuthenticated){
+            const {history} = this.props;
+            history.push('/signin');
+        }
+
         const cart = localStorage.getItem(SHOPPING_CART);
         if (cart){
             const products = JSON.parse(cart);
             this.state = {products: products};
         }else{
             this.state = {products: []}
-        }
-    }
-    componentWillUnmount() {
-        if (!this.props.auth.isAuthenticated){
-            const {history} = this.props;
-            history.push('/signin');
         }
     }
 

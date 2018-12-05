@@ -10,7 +10,6 @@ import Signup from './Auth/Signup';
 import Order from './Order';
 import ProductForm from "./Product/ProductForm";
 import ShoppingCart from "./ShoppingCart";
-import UserDashboard from "./UserDashboard";
 import NewStore from "./NewStore";
 import Dashboard from "./Dashboard";
 import EditStore from "./EditStore";
@@ -35,7 +34,6 @@ class App extends Component {
                         <Route path='/order' component={Order}></Route>
                         <Route path='/productform/:productId' exact component={ProductForm}></Route>
                         <Route path='/ShoppingCart' component={ShoppingCart}></Route>
-                        <Route path='/UserDashboard' component={UserDashboard}></Route>
                         <Route path='/NewStore' component={NewStore}></Route>
                         <Route path='/Dashboard' component={Dashboard}></Route>
                         <Route path='/EditStore' component={EditStore}></Route>

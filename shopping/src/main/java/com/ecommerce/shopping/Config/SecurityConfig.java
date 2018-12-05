@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private UserSecurityService userSecurityService;
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/",
-            "/product/**",
+            "/api/product/list",
+            "/api/product/one/**",
             "/user/signin",
             "/user/signup"
     };
@@ -76,7 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .anyRequest().permitAll();
 //                    .and().logout().logoutUrl("/user/signout");
 //                .and().oauth2Login();
-
     }
 
 //    @Autowired

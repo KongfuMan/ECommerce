@@ -3,16 +3,11 @@ import {Link} from "react-router-dom";
 
 
 class Dashboard extends Component{
+
     render(){
         return(
 
             <div>
-                <br/>
-                <br/>
-                <hr/>
-                <Link to="/EditProduct"><hr9><b>Edit Products</b></hr9></Link>
-                <hr/>
-                <hr9><b>Edit Profile</b></hr9>
                 <div className="row">
                     <form className="col s12">
                         <div className="row">
@@ -70,8 +65,6 @@ class Dashboard extends Component{
                         </div>
                     </form>
                 </div>
-                <hr/>
-                <hr9><b>Edit Address</b></hr9>
 
                 <div className="row">
                     <form className="col s12">

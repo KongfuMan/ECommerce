@@ -28,8 +28,8 @@ class Header extends Component{
                     </ul>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to="/order">Order</Link></li>
-                        <li><Link to="/shoppingCart">Shopping Cart</Link></li>
-                        <li><Link to="/UserDashboard">My account</Link></li>
+                        <li><Link to="/shoppingcart">Shopping Cart</Link></li>
+                        <li><Link to="/dashboard">My account</Link></li>
                     </ul>
                 </div>
                 <div className="row">
