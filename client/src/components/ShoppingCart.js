@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {SHOPPING_CART} from "../actions/types";
+import {Link} from 'react-router-dom';
 
 class ShoppingCart extends Component{
     constructor(props){
@@ -25,7 +26,9 @@ class ShoppingCart extends Component{
     }
 
     handlCheckout(){
-
+        // console.log(this.props);
+        // const {history} = this.props;
+        // history.push('/order');
     }
 
     renderContent(){
@@ -75,8 +78,8 @@ class ShoppingCart extends Component{
                     <form className="col s12">
                         {this.renderContent()}
                     </form>
-                    <a className="waves-effect waves-light btn left" onClick={this.handlCheckout}>
-                        <i className="material-icons right">attach_money</i>Checkout</a>
+                    <Link to={'/order'} className="waves-effect waves-light btn left" onClick={this.handlCheckout}>
+                        <i className="material-icons right">attach_money</i>Checkout</Link>
                 </div>
             </div>
         );

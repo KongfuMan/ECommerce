@@ -20,8 +20,8 @@ public class Order {
             name = "native",
             strategy = "native"
     )
-    @Column(name = "order_number")
-    private int orderNum;
+    @Column(name = "id")
+    private int orderId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
@@ -32,14 +32,14 @@ public class Order {
     private Transaction transaction;
 
     @OneToMany(mappedBy = "order")
-    private Set<OrderProduct> orderProductIds= new HashSet<OrderProduct>();
+    private Set<OrderProduct> orderProducts = new HashSet<>();
 
     public int getOrderNum() {
-        return orderNum;
+        return orderId;
     }
 
     public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
+        this.orderId = orderNum;
     }
 
     public Customer getCustomer() {
@@ -58,21 +58,21 @@ public class Order {
         this.transaction = transaction;
     }
 
-    public Set<OrderProduct> getOrderProductIds() {
-        return orderProductIds;
+    public Set<OrderProduct> getOrderProducts() {
+        return orderProducts;
     }
 
-    public void setOrderProductIds(Set<OrderProduct> orderProductIds) {
-        this.orderProductIds = orderProductIds;
+    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "orderNum=" + orderNum +
+                "orderNum=" + orderId +
                 ", customer=" + customer +
                 ", transaction=" + transaction +
-                ", orderProductIds=" + orderProductIds +
+//                ", orderProducts=" + orderProducts +
                 '}';
     }
 }

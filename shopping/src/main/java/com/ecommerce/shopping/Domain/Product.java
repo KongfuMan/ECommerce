@@ -22,8 +22,8 @@ public class Product {
             name = "native",
             strategy = "native"
     )
-    @Column(name = "product_id")
-    private long productId;
+    @Column(name = "id")
+    private int productId;
 
     @Column(name = "name")
     private String name;
@@ -40,13 +40,13 @@ public class Product {
 
     @JsonIgnore
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Set<OrderProduct> orderProducts = new HashSet<OrderProduct>();
+    private Set<OrderProduct> orderProducts = new HashSet<>();
 
     public long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 

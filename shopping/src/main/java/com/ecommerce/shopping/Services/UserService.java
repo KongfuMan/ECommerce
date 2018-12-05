@@ -1,16 +1,10 @@
 package com.ecommerce.shopping.Services;
 
 import com.ecommerce.shopping.Config.SecurityUtility;
-import com.ecommerce.shopping.Domain.Category;
-import com.ecommerce.shopping.Domain.Customer;
-import com.ecommerce.shopping.Domain.Product;
+import com.ecommerce.shopping.Domain.*;
 import com.ecommerce.shopping.Domain.Security.Role;
-import com.ecommerce.shopping.Domain.User;
 import com.ecommerce.shopping.Exceptions.UsernameAlreadyExistsExceptions;
-import com.ecommerce.shopping.Repositories.CategoryRepository;
-import com.ecommerce.shopping.Repositories.ProductRepository;
-import com.ecommerce.shopping.Repositories.RoleRepository;
-import com.ecommerce.shopping.Repositories.UserRepository;
+import com.ecommerce.shopping.Repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +35,12 @@ public class UserService {
 
     @Autowired
     private CategoryRepository categoryRepo;
+
+    @Autowired
+    private OrderRepository orderRepo;
+
+    @Autowired
+    private OrderProductRepository orderProductRepo;
 
     @Autowired
     private JwtService jwtService;
@@ -91,8 +91,12 @@ public class UserService {
         userRepository.saveAll(mgrs);
         List<Category> cats = createCategory();
         categoryRepo.saveAll(cats);
-        List<Product> prods = createProducts(1000,cats);
+        List<Product> prods = createProducts(12,cats);
         productRepo.saveAll(prods);
+
+        for (int i = 0; i < custs.size(); i++){
+            createOrders(3, prods, (Customer)custs.get(i));
+        }
     }
 
     public List<Role> createRole(){
@@ -148,5 +152,30 @@ public class UserService {
             prods.add(prod);
         }
         return prods;
+    }
+
+    public List<Order> createOrders(int count, List<Product> products, Customer customer){
+        List<Order> orders = new ArrayList();
+        List<OrderProduct> orderProducts = new ArrayList();
+        for (int j = 0; j < count; j++){
+            Order order = new Order();
+            order.setCustomer(customer);
+//            Set<OrderProduct> orderProductSet = new HashSet<>();
+            for (int i = 0; i < 3; i++){
+                Product buy = products.get(i);
+                OrderProduct orderProduct = new OrderProduct();
+                orderProduct.setOrder(order);
+                orderProduct.setProduct(buy);
+                orderProduct.setProductAmount(1);
+                orderProducts.add(orderProduct);
+//                buy.setOrderProducts(orderProductSet);
+            }
+            orders.add(order);
+//            order.setOrderProducts(orderProductSet);
+//            orderProducts.addAll(orderProductSet);
+        }
+        orderRepo.saveAll(orders);
+        orderProductRepo.saveAll(orderProducts);
+        return orders;
     }
 }

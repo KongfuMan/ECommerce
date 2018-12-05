@@ -1,8 +1,31 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-
+import {SHOPPING_CART} from "../actions/types";
+import {withRouter} from 'react-router-dom';
+import * as actions from '../actions/index';
 
 class Order extends Component{
+    constructor(props){
+        super(props);
+        const cart = localStorage.getItem(SHOPPING_CART);
+        if (cart){
+            const products = JSON.parse(cart);
+            this.state = {products: products};
+        }else{
+            this.state = {products: []}
+        }
+    }
+    componentWillUnmount() {
+        if (!this.props.auth.isAuthenticated){
+            const {history} = this.props;
+            history.push('/signin');
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchOrder();
+    }
+
     renderContent(){
 
     }
@@ -271,4 +294,4 @@ const mapStateToProps = ({auth})=>{
     return {auth : auth};
 }
 
-export default connect(mapStateToProps)(Order);
+export default connect(mapStateToProps,actions)(withRouter(Order));

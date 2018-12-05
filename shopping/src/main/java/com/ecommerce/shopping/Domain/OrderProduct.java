@@ -9,12 +9,14 @@ import javax.persistence.*;
 @Table(name="Order_Product")
 public class OrderProduct {
     @EmbeddedId
-    OrderProductId id;
+    OrderProductId id = new OrderProductId();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId(value = "productId")
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId(value = "orderId") //maps to the @EmbeddedId property name instead of column name
     private Order order;
 
     @Column(name = "product_amount")

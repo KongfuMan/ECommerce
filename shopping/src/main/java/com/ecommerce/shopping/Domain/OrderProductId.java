@@ -3,29 +3,30 @@ package com.ecommerce.shopping.Domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class OrderProductId implements Serializable{
 
     @Column(name = "order_id")
-    private long orderId;
+    private int orderId;
 
     @Column(name = "product_id")
-    private long productId;
+    private int productId;
 
-    public long getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public long getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
@@ -35,5 +36,21 @@ public class OrderProductId implements Serializable{
                 "orderId=" + orderId +
                 ", productId=" + productId +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        OrderProductId that = (OrderProductId) o;
+        return orderId == that.orderId && productId == that.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, productId);
     }
 }
