@@ -160,7 +160,6 @@ public class UserService {
         for (int j = 0; j < count; j++){
             Order order = new Order();
             order.setCustomer(customer);
-//            Set<OrderProduct> orderProductSet = new HashSet<>();
             for (int i = 0; i < 3; i++){
                 Product buy = products.get(i);
                 OrderProduct orderProduct = new OrderProduct();
@@ -168,11 +167,8 @@ public class UserService {
                 orderProduct.setProduct(buy);
                 orderProduct.setProductAmount(1);
                 orderProducts.add(orderProduct);
-//                buy.setOrderProducts(orderProductSet);
             }
             orders.add(order);
-//            order.setOrderProducts(orderProductSet);
-//            orderProducts.addAll(orderProductSet);
         }
         orderRepo.saveAll(orders);
         orderProductRepo.saveAll(orderProducts);
