@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/index';
 import {Link} from 'react-router-dom'
 
 class Header extends Component{
+    constructor(props){
+        super(props);
+        this.state = {input: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+
+    handleChange(event){
+        const{name,value} = event.target;
+        this.setState({[name]:value});
+    }
+
     renderContent(){
         const{isAuthenticated} = this.props.auth;
         console.log(isAuthenticated);
@@ -35,11 +47,10 @@ class Header extends Component{
                 <div className="row">
                     <div className="input-field col s10">
                         <i className="material-icons prefix">zoom_in</i>
-                        <input id="icon_prefix" type="text" className="validate"/>
-                        <label htmlFor="icon_prefix">Click here to search</label>
+                        <input id="icon_prefix" type="text" placeholder={'Click here to search'} className="validate" name='input' value={this.state.input} onChange={this.handleChange}/>
                     </div>
                     <div className="input-field col s2">
-                        <a className="waves-effect waves-light btn">Search</a>
+                        <Link to={'/searchresult/'+ this.state.input} className="waves-effect waves-light btn" >Search</Link>
                     </div>
                 </div>
             </nav>
@@ -58,4 +69,4 @@ const  mapStateToProps = ({auth})=>{
 //      }
 // }
 
-export default connect(mapStateToProps,actions)(Header);
+export default connect(mapStateToProps)(Header);

@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private static final String[] PUBLIC_MATCHERS = {
             "/api/product/list",
             "/api/product/one/**",
+            "/api/product/search/**",
             "/user/signin",
             "/user/signup"
     };
@@ -60,20 +61,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring()
+//                .antMatchers(PUBLIC_MATCHERS);
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter();
         http.addFilterBefore(customFilter,UsernamePasswordAuthenticationFilter.class);
 
-        http.csrf().disable().cors().disable()
+        http.cors().disable().csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers(PUBLIC_MATCHERS).permitAll()
-                    .anyRequest().permitAll();
+                    .anyRequest().authenticated();
 //                    .and().logout().logoutUrl("/user/signout");
 //                .and().oauth2Login();
     }

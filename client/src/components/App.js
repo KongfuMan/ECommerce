@@ -16,6 +16,7 @@ import EditStore from "./EditStore";
 import EditProduct from "./Manager/EditProduct";
 import Payment from "./Payment";
 import ProductItem from "./Product/ProductItem";
+import SearchRes from './SearchRes';
 
 
 class App extends Component {
@@ -27,7 +28,7 @@ class App extends Component {
             <div className="container">
                 <BrowserRouter>
                     <div>
-                        <Header></Header>
+                        <Header/>
                         <Route exact={true} path="/" component={Home}></Route>
                         <Route path='/signin' component={Signin}></Route>
                         <Route path='/signup' component={Signup}></Route>
@@ -40,6 +41,7 @@ class App extends Component {
                         <Route path='/EditProduct' component={EditProduct}></Route>
                         <Route path='/Payment' component={Payment}></Route>
                         <Route path='/ProductItem' component={ProductItem}></Route>
+                        <Route path='/Searchresult/:productName' exact component={SearchRes} />
                         <Footer/>
                     </div>
                 </BrowserRouter>
