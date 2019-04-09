@@ -2,7 +2,7 @@ import {FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_FAILURE} 
 import {FETCH_ORDERS_REQUEST, FETCH_ORDERS_FAILURE, FETCH_ORDERS_SUCCESS,FETCH_A_PRODUCT} from "./types";
 import {SEARCH_PRODUCTS} from './types';
 import axios from "axios/index";
-import {getJwt} from './jwtHeader';
+// import {getJwt} from './jwtHeader';
 
 function fetchProductsRequest() {
     return {

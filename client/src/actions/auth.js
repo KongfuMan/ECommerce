@@ -82,6 +82,7 @@ function signupError(error) {
 }
 
 function signoutRequest() {
+    console.log('signoutRequest');
     return {
         type: SIGNOUT_REQUEST,
         isFetching: true,
@@ -90,6 +91,7 @@ function signoutRequest() {
 }
 
 function signoutReceive() {
+    console.log('signoutReceive');
     return {
         type: SIGNOUT_SUCCESS,
         isFetching: false,

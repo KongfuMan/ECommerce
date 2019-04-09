@@ -19,7 +19,7 @@ class ShoppingCart extends Component{
         const{products} = this.state;
         const res = products.filter(prod=>{
             const id = prod[0];
-            return id != prodId
+            return id !== prodId
         })
         this.setState({products:res});
         localStorage.setItem(SHOPPING_CART, JSON.stringify([...new Map(res)]))

@@ -12,7 +12,7 @@ class SearchRes extends Component{
     }
 
     renderContent(){
-        if (!this.props.searchResult || this.props.searchResult.length == 0){
+        if (!this.props.searchResult || this.props.searchResult.length === 0){
             return (
                 <div>
                     <h2>No result found!</h2>

@@ -9,11 +9,12 @@ class ProductList extends Component{
     }
     renderContent(){
         return this.props.productList.map(prod=>{
+            console.log(prod);
             return(
                 <div key={prod.productId} id="toggle-container" className="col s3 cards-container">
                     <div className="card small">
                         <div className="card-image waves-effect waves-block waves-light">
-                            <img className="activator" src="https://images-na.ssl-images-amazon.com/images/I/719wKCjcGfL._SL1500_.jpg" alt=''/>
+                            <img className="activator" src="https://images-na.ssl-images-amazon.com/images/I/719wKCjcGfL._SL1500_.jpg" alt=""/>
                         </div>
 
                         <div className="card-content">

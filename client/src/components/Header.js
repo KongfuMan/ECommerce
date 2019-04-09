@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
+import * as actions from '../actions/index';
 
 class Header extends Component{
     constructor(props){
@@ -18,7 +19,7 @@ class Header extends Component{
 
     renderContent(){
         const{isAuthenticated} = this.props.auth;
-        console.log(isAuthenticated);
+        console.log('isAuthenticated',isAuthenticated);
         switch (isAuthenticated){
             case true:
                 return(
@@ -63,10 +64,4 @@ const  mapStateToProps = ({auth})=>{
     return {auth : auth};
 };
 
-// const mapDispatchToProps = (disptch) => {
-//      return {
-//          propsName : ()=>dispatch(action)
-//      }
-// }
-
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps,actions)(Header);

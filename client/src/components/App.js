@@ -17,6 +17,8 @@ import EditProduct from "./Manager/EditProduct";
 import Payment from "./Payment";
 import ProductItem from "./Product/ProductItem";
 import SearchRes from './SearchRes';
+import {NotFound} from "./Error/404";
+import {NotAuthorized} from "./Error/405";
 
 
 class App extends Component {
@@ -42,6 +44,8 @@ class App extends Component {
                         <Route path='/Payment' component={Payment}></Route>
                         <Route path='/ProductItem' component={ProductItem}></Route>
                         <Route path='/Searchresult/:productName' exact component={SearchRes} />
+                        <Route path='/page-not-found' exact component={NotFound}/>
+                        <Route path='/not-authorized' exact component={NotAuthorized}/>
                         <Footer/>
                     </div>
                 </BrowserRouter>
@@ -49,19 +53,5 @@ class App extends Component {
         );
     }
 }
-
-//pass a slice of state data into App.props
-// const mapStateToProps = state => {
-//     return{
-//         auth : state.auth
-//     }
-// }
-
-//update the state data by App
-// const mapDispatchToProps = disptch => {
-//      return {
-//          propsName : ()=>dispatch(action)
-//      }
-// }
 
 export default connect(null,actions)(App);

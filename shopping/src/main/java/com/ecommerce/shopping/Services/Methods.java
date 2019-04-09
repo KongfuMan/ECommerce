@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*This method is used for create some dummy data in the database
+*
+* */
 public class Methods {
 
 	public static void main(String[] args) {

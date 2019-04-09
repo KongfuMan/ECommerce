@@ -12,7 +12,7 @@ class ProductItem extends Component{
                     <div className="col s12 m7">
                         <div className="card">
                             <div className="card-image">
-                                <img src="http://materializecss.com/images/office.jpg"/>
+                                <img src="http://materializecss.com/images/office.jpg" alt=""/>
                                     <span className="card-title">Product name</span>
                             </div>
                             <div className="card-content">
